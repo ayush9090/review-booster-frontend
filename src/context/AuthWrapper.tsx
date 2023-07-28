@@ -1,6 +1,7 @@
 import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
   User,
 } from "firebase/auth";
 import React, { FC, useEffect, useState } from "react";
@@ -8,6 +9,8 @@ import { auth } from "../config/Firebase";
 
 export interface TypeAuthContext {
   login: any;
+  user: any;
+  logout: any;
 }
 
 export interface props {
@@ -25,6 +28,8 @@ const AuthWrapper: FC<props> = ({ children }) => {
       if (user) {
         console.log("user", user);
         setUser(user as User);
+      }else{
+        console.log("else user",user)
       }
     });
     setLoading(false);
@@ -35,9 +40,15 @@ const AuthWrapper: FC<props> = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   }
 
+  function logout() {
+    console.log("in logout");
+    return signOut(auth);
+  }
+
   const store = {
     login,
     user,
+    logout,
   };
 
   return (
