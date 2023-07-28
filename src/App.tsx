@@ -1,14 +1,10 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-
+import Signin from "./components/signin/Signin";
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to review booster</h1>
-      </header>
-    </div>
+    <Signin/>
   );
 }
 
