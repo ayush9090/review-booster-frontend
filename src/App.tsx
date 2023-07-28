@@ -1,12 +1,20 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Signin from "./components/signin/Signin";
 import AuthWrapper from "./context/AuthWrapper";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./features/Home/Components/Home";
+
 function App() {
   return (
     <AuthWrapper>
-      <Signin />
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Signin />} />
+          <Route path="/" element={<Signin />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </Router>
     </AuthWrapper>
   );
 }
