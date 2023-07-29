@@ -19,7 +19,7 @@ const Signin: React.FC = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+ let loadings=false;
   const handleSignIn = async (e: FormEvent) => {
     console.log("email", email, "password0", password);
     e.preventDefault();
@@ -27,9 +27,11 @@ const Signin: React.FC = () => {
     try {
       const res = await login(email, password);
       console.log("res", res);
+      loadings=true;
     } catch (err) {
       console.log("error", err);
       setLoading(false);
+      loadings=false;
     }
   };
 
