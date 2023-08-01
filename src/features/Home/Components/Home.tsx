@@ -3,7 +3,9 @@ import { AuthContext } from "../../../context/AuthWrapper";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../config/Firebase";
-import Header from "../../../components/Header/Header";
+import Header from "../../../components/Navbar/Navbar";
+import Dashboard from "../../../components/Dashboard/Dashboard";
+import Sendreview from "../../../components/Sendreview/Sendreview";
 
 const Home: React.FC = () => {
   const { logout, user } = useContext(AuthContext);
@@ -26,7 +28,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Header />
-      <button onClick={() => onClickLogout()}>Log out</button>
+      <Sendreview/>
     </>
   );
 };
