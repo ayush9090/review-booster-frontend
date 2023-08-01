@@ -14,19 +14,15 @@ const Home: React.FC = () => {
       if (user) {
         console.log("user", user);
       } else {
+        console.log("in else home");
         navigate("/login");
       }
     });
   }, [user]);
 
-  const onClickLogout = async () => {
-    const res = await logout();
-    console.log("logout", res);
-  };
   return (
     <>
       <Navbar />
-      <button onClick={() => onClickLogout()}>Log out</button>
     </>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ChangeSettings from "../../features/ChangeSettings/ChangeSettings";
 import ContactUs from "../../features/ContactUs/ContactUs";
 import Dashboard from "../../features/Dashboard/Dashboard";
@@ -15,6 +16,8 @@ import {
 } from "./NavbarStyles";
 
 const Navbar: React.FC = () => {
+  let navigate = useNavigate();
+
   const NavOptions = [
     {
       key: "Dashboard",
@@ -62,7 +65,7 @@ const Navbar: React.FC = () => {
               );
             })}
           </Tabs>
-          <Profile>
+          <Profile onClick={() => navigate("/profile")}>
             <ProfileIconBg>
               <ProfileIcon />
             </ProfileIconBg>
