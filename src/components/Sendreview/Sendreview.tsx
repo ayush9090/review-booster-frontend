@@ -2,16 +2,31 @@ import React, { FormEvent, useContext, useEffect, useState } from "react";
 import logo from "../assets/logos/Logo.png";
 import { AuthContext } from "../../context/AuthWrapper";
 import { useNavigate } from "react-router-dom";
-import { AddGuest, Container,Textspan, FlexboxColumn, Items, StyledIcon, Input, SendreviewButton, DropdownOption, DropdownSelect } from "./Sendreviewstyle";
+import { useMediaQuery } from "react-responsive";
+import {
+  AddGuest,
+  Container,
+  Textspan,
+  FlexboxColumn,
+  Items,
+  StyledIcon,
+  Input,
+  SendreviewButton,
+  DropdownOption,
+  DropdownSelect,
+} from "./Sendreviewstyle";
 import { faUserPlus, faFileExcel } from "@fortawesome/free-solid-svg-icons";
-const Sendreview: React.FC<{  }> = () => {
+const Sendreview: React.FC<{}> = () => {
+    const isSmallScreen = useMediaQuery({
+      query: " (max-width: 721px)",
+    });
+    console.log(isSmallScreen)
   return (
     <Container>
-      <Items>
+      <Items smallscreen={isSmallScreen}>
         <DropdownSelect id="cars">
           <DropdownOption value="volvo">Motel Highlant Inn</DropdownOption>
           <DropdownOption value="saab">Holiday Inn</DropdownOption>
-          {/* Add more options as needed */}
         </DropdownSelect>
         <FlexboxColumn>
           <AddGuest>
@@ -23,10 +38,14 @@ const Sendreview: React.FC<{  }> = () => {
             <Textspan>BULK IMPORT</Textspan>
           </AddGuest>
         </FlexboxColumn>
-        <Input></Input>
-        <Input></Input>
-        <Input></Input>
-        <SendreviewButton></SendreviewButton>
+        <Input type="text" placeholder="Enter full name"></Input>
+        <Input type="email" placeholder="Enter your email"></Input>
+        <Textspan style={{ color: "black", marginBottom: "1rem" }}>
+          AND/OR
+        </Textspan>
+        <Input type="number" placeholder="Enter your mobile number"></Input>
+
+        <SendreviewButton>Send Review</SendreviewButton>
       </Items>
     </Container>
   );

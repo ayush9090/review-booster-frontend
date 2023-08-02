@@ -145,7 +145,6 @@ const Navbar = () => {
           </Li>
         </Ul>
       </Nav>
-      
     </>
   );
 };
