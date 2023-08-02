@@ -3,6 +3,7 @@ import { AuthContext } from "../../../context/AuthWrapper";
 import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../config/Firebase";
+import Navbar from "../../../components/navbar/Navbar";
 
 const Home: React.FC = () => {
   const { logout, user } = useContext(AuthContext);
@@ -13,16 +14,17 @@ const Home: React.FC = () => {
       if (user) {
         console.log("user", user);
       } else {
+        console.log("in else home");
         navigate("/login");
       }
     });
   }, [user]);
 
-  const onClickLogout = async () => {
-    const res = await logout();
-    console.log("logout", res);
-  };
-  return <button onClick={() => onClickLogout()}>Log out</button>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 };
 
 export default Home;

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
@@ -25,20 +25,20 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 80%;
   padding: 0.75rem;
   margin-bottom: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
 `;
 
 export const SignInButton = styled.button`
-  width: 106%;
+  width: 87%;
   padding: 0.75rem;
   margin-bottom: 1rem;
   border-radius: 4px;
-  background-color: #78B2E7;
+  background-color: #78b2e7;
   color: #fff;
   border: none;
 `;
