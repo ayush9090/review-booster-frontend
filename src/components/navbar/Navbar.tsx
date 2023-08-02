@@ -1,82 +1,150 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { Nav, Ul, Img, Li } from "./Navbarstyle";
+import Logo from "../assets/logos/Logo.png";
+import { AuthContext } from "../../context/AuthWrapper";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../config/Firebase";
 import { useNavigate } from "react-router-dom";
-import ChangeSettings from "../../features/ChangeSettings/ChangeSettings";
-import ContactUs from "../../features/ContactUs/ContactUs";
-import Dashboard from "../../features/Dashboard/Dashboard";
-import SendReview from "../../features/SendReview/SendReview";
-import ProfileIcon from "../assets/logos/ProfileIcon";
-import ReviewBoosterIcon from "../assets/logos/ReviewBoosterIcon";
-import {
-  NavContainer,
-  TabsOptionsContainer,
-  Option,
-  Tabs,
-  Profile,
-  ProfileIconBg,
-} from "./NavbarStyles";
+import Dashboard from "../Dashboard/Dashboard";
 
-const Navbar: React.FC = () => {
+const Navbar = () => {
+  const [activeLink, setActiveLink] = React.useState<string>("/dashboard");
+  const [shownavOption, setShownavOption] = React.useState("Dashboard");
+  const { logout, user } = useContext(AuthContext);
   let navigate = useNavigate();
 
-  const NavOptions = [
+  const [tabs, setTabs] = useState([
     {
-      key: "Dashboard",
-      value: "Dashboard",
+      key: "dashboard",
       isSelected: true,
     },
     {
-      key: "Send Review",
-      value: "Send Review",
+      key: "review",
       isSelected: false,
     },
     {
-      key: "Change settings",
-      value: "Change settings",
+      key: "setting",
       isSelected: false,
     },
     {
-      key: "Contact us",
-      value: "Contact us",
+      key: "contactus",
       isSelected: false,
     },
-  ];
+    {
+      key: "logout",
+      isSelected: false,
+    },
+  ]);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("user", user);
+      } else {
+        navigate("/login");
+      }
+    });
+  }, [user]);
 
-  const [currentSelected, setCurrentSelected] = useState("Dashboard");
+  const onClickLogout = async () => {
+    setShownavOption("logout");
 
-  const onClickOption = (key: string) => {
-    setCurrentSelected(key);
+    const res = await logout();
+    const updatedTabs = tabs.map((tab) => ({
+      ...tab,
+      isSelected: tab.key === "logout",
+    }));
+    setTabs(updatedTabs);
+  };
+
+  const onClickDashboard = () => {
+    setShownavOption("dashboard");
+    const updatedTabs = tabs.map((tab) => ({
+      ...tab,
+      isSelected: tab.key === "dashboard",
+    }));
+    setTabs(updatedTabs);
+  };
+
+  const onClickReview = () => {
+    setShownavOption("review");
+    const updatedTabs = tabs.map((tab) => ({
+      ...tab,
+      isSelected: tab.key === "review",
+    }));
+    setTabs(updatedTabs);
+  };
+
+  const onClickSetting = () => {
+    setShownavOption("setting");
+    const updatedTabs = tabs.map((tab) => ({
+      ...tab,
+      isSelected: tab.key === "setting",
+    }));
+    setTabs(updatedTabs);
+  };
+
+  const onClickContact = () => {
+    setShownavOption("contactus");
+    const updatedTabs = tabs.map((tab) => ({
+      ...tab,
+      isSelected: tab.key === "contactus",
+    }));
+    setTabs(updatedTabs);
   };
 
   return (
     <>
-      <NavContainer>
-        <ReviewBoosterIcon height={"125"} width={"74"} />
-        <TabsOptionsContainer>
-          <Tabs>
-            {NavOptions.map((option) => {
-              return (
-                <Option
-                  style={{ color: "#ffffff" }}
-                  currentSelectd={currentSelected === option.key}
-                  onClick={() => onClickOption(option.key)}
-                >
-                  {option.value}
-                </Option>
-              );
-            })}
-          </Tabs>
-          <Profile onClick={() => navigate("/profile")}>
-            <ProfileIconBg>
-              <ProfileIcon />
-            </ProfileIconBg>
-          </Profile>
-        </TabsOptionsContainer>
-      </NavContainer>
-      <ProfileIconBg />
-      {currentSelected === "Dashboard" && <Dashboard />}
-      {currentSelected === "Send Review" && <SendReview />}
-      {currentSelected === "Change settings" && <ChangeSettings />}
-      {currentSelected === "Contact us" && <ContactUs />}
+      <Nav>
+        <Img>
+          <img
+            src={Logo}
+            alt="Logo"
+            style={{ height: "100%", marginRight: "50px" }}
+          />
+        </Img>
+        <Ul>
+          <Li
+            onClick={onClickDashboard}
+            style={{
+              backgroundColor: shownavOption === "dashboard" ? "#796BCD" : "",
+            }}
+          >
+            Dashboard
+          </Li>
+          <Li
+            onClick={onClickReview}
+            style={{
+              backgroundColor: shownavOption === "review" ? "#796BCD" : "",
+            }}
+          >
+            Send Review
+          </Li>
+          <Li
+            onClick={onClickSetting}
+            style={{
+              backgroundColor: shownavOption === "setting" ? "#796BCD" : "",
+            }}
+          >
+            Change Setting
+          </Li>
+          <Li
+            onClick={onClickContact}
+            style={{
+              backgroundColor: shownavOption === "contactus" ? "#796BCD" : "",
+            }}
+          >
+            Contact Us
+          </Li>
+          <Li
+            style={{
+              backgroundColor: shownavOption === "logout" ? "#796BCD" : "",
+            }}
+            onClick={onClickLogout}
+          >
+            Log out
+          </Li>
+        </Ul>
+      </Nav>
     </>
   );
 };
