@@ -36,6 +36,9 @@ export const SendreviewButton = styled.button`
   color: #fff;
   border: none;
   height: 40px;
+  &:hover {
+    background-color: #1d85e4;
+  }
 `;
 export const FlexboxColumn = styled.div`
   display: flex;
@@ -52,6 +55,9 @@ export const AddGuest = styled.div`
   align-items: center;
   margin: 10px;
   border-radius: 4px;
+  &:hover {
+    background-color: #1d85e4;
+  }
 `;
 export const StyledIcon = styled(FontAwesomeIcon)`
   color: #fcfcfd;
@@ -70,6 +76,9 @@ export const DropdownSelect = styled.select`
   border-radius: 4px;
   font-size: 16px;
   color: #fcfcfd;
+  &:hover {
+    background-color: #1d85e4;
+  }
 `;
 
 export const DropdownOption = styled.option`

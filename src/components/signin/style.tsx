@@ -41,4 +41,7 @@ export const SignInButton = styled.button`
   background-color: #78b2e7;
   color: #fff;
   border: none;
+  &:hover {
+    background-color: #1d85e4;
+  }
 `;

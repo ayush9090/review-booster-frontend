@@ -41,6 +41,10 @@ export const Option = styled.div<{ currentSelectd: boolean }>`
   align-items: center;
   padding: 0px 16px 0px 16px;
   background: ${(props) => (props.currentSelectd ? "#796BCD" : " #6c98da")};
+  &:hover {
+    background-color: #1d85e4;
+  }
+  cursor: pointer;
 `;
 
 export const ProfileIconBg = styled.div`
