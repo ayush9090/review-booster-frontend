@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../../config/Firebase";
 import Navbar from "../../../components/navbar/Navbar";
+import Profile from "../../Profile/Profile";
+import Profilepopup from "../../Profilepopup/Profilepopup";
 
 const Home: React.FC = () => {
   const { logout, user } = useContext(AuthContext);
