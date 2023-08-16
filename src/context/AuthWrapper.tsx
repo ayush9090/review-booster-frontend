@@ -11,7 +11,7 @@ export interface TypeAuthContext {
   login: any;
   user: any;
   logout: any;
-}`  `
+}
 
 export interface props {
   children: React.ReactNode;
