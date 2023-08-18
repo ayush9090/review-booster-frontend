@@ -20,3 +20,18 @@ export const NavOptions = [
     isSelected: false,
   },
 ];
+
+export interface MotelDetails {
+  motelName: string;
+  motelEmail: string;
+  motelPhoneNumber: string;
+  motelLocation?: string;
+  userName?: string;
+}
+
+export interface UpdateProfileRequest {
+  userName: string;
+  motelEmail: string;
+  motelName: string;
+  motelPhoneNumber: string;
+}

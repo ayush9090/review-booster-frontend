@@ -4,9 +4,10 @@ import { CustomModal, Okbtn } from "./Dialogboxstyle";
 
 interface ExcelErrorDialogProps {
   isOpen: boolean;
-  errorMessage: string;
+  errorMessage?: string;
   MessageType: string;
   onClose: () => void;
+  successMessage?: string;
 }
 
 const Dialogbox: React.FC<ExcelErrorDialogProps> = ({
@@ -14,6 +15,7 @@ const Dialogbox: React.FC<ExcelErrorDialogProps> = ({
   errorMessage,
   MessageType,
   onClose,
+  successMessage,
 }) => {
   return (
     <CustomModal
@@ -22,7 +24,9 @@ const Dialogbox: React.FC<ExcelErrorDialogProps> = ({
       contentLabel="Excel Error"
     >
       <h2>{MessageType}</h2>
-      <p>{errorMessage}</p>
+      <p style={{ color: successMessage?.length ? "green" : "red" }}>
+        {errorMessage || successMessage}
+      </p>
       <Okbtn onClick={onClose}>OK</Okbtn>
     </CustomModal>
   );
