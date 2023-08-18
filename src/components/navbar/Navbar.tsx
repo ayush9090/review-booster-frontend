@@ -87,7 +87,6 @@ const Navbar: React.FC = () => {
           </Profile>
         </TabsOptionsContainer>
       </NavContainer>
-      <ProfileIconBg />
       {currentSelected === "Dashboard" && <Dashboard />}
       {currentSelected === "Send Review" && <SendReview />}
       {currentSelected === "Change settings" && <ChangeSettings />}
