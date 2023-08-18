@@ -5,8 +5,8 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
-  min-height: 94vh;
-  width: 100vw;
+  min-height: 92vh;
+  width: 100%;
 `;
 export const Items = styled.div<{ smallscreen: boolean }>`
   text-align: center;
