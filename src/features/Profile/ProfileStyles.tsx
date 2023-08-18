@@ -36,7 +36,7 @@ export const FlexboxColumn = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
 `;
-export const Inlinebtn = styled.div`
+export const Inlinebtn = styled.button`
   background-color: #78b2e7;
   height: 40px;
   width: 50%;

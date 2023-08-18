@@ -7,13 +7,13 @@ import { auth } from "../../config/Firebase";
 
 const Profilepopup: React.FC = () => {
   const { logout, user } = useContext(AuthContext);
-
+  let navigate = useNavigate();
+  console.log("user in pop up", user);
   const onClickLogout = async () => {
     const res = await logout();
     navigate("/login");
     console.log("logout", res);
   };
-  let navigate = useNavigate();
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -27,7 +27,11 @@ const Profilepopup: React.FC = () => {
   return (
     <>
       <Container>
-        <Menuoption onClick={() => navigate("/profile")}>Profile</Menuoption>
+        <Menuoption
+          onClick={() => navigate("/profile", { state: { email: user.email } })}
+        >
+          Profile
+        </Menuoption>
         <Menuoption onClick={() => onClickLogout()}>Log Out</Menuoption>
       </Container>
     </>

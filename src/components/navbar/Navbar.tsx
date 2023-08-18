@@ -16,9 +16,7 @@ import {
 } from "./NavbarStyles";
 import Profilepopup from "../../features/Profilepopup/Profilepopup";
 
-const Navbar: React.FC = () => {
-  let navigate = useNavigate();
-
+const Navbar: React.FC<any> = () => {
   const NavOptions = [
     {
       key: "Dashboard",
