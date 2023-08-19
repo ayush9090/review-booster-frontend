@@ -20,12 +20,16 @@ import {
 } from "./SendReviewStyles";
 import { faUserPlus, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import Dialogbox from "../Dialogbox/Dialogbox";
+import { sendSmsandEmailRepo } from "../../repo/sendSmsandEmailRepo";
 const SendReview: React.FC<{}> = () => {
   const isSmallScreen = useMediaQuery({
     query: " (max-width: 721px)",
   });
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [functionForReview, setfunctionForReview] =
+    useState("handleReviewSend");
+
   const [MessageType, setMessageType] = useState("");
   const [showSingleReviewContainer, setShowSingleReviewContainer] =
     useState(true);
@@ -35,7 +39,9 @@ const SendReview: React.FC<{}> = () => {
   const [selectedFilename, setSelectedFilename] = useState<
     string | undefined
   >();
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files && event.target.files[0];
     console.log(file);
@@ -129,6 +135,13 @@ const SendReview: React.FC<{}> = () => {
   const closeErrorDialog = () => {
     setErrorDialogOpen(false);
   };
+
+  const handleSingleReviewSend = async () => {
+    //const res = await sendSmsandEmailRepo.sendEmail(name,email,phoneNumber);
+
+  };
+  const handleBulkReviewSend = async () => {
+  };
   return (
     <Container>
       <Items smallscreen={isSmallScreen}>
@@ -155,12 +168,32 @@ const SendReview: React.FC<{}> = () => {
         </FlexboxColumn>
         {showSingleReviewContainer && (
           <div id="Containerforsinglereview">
-            <Input type="text" placeholder="Enter full name"></Input>
-            <Input type="email" placeholder="Enter your email"></Input>
+            <Input
+              type="text"
+              placeholder="Enter full name"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            ></Input>
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            ></Input>
             <Textspan style={{ color: "black", marginBottom: "1rem" }}>
               AND/OR
             </Textspan>
-            <Input type="number" placeholder="Enter your mobile number"></Input>
+            <Input
+              placeholder="Enter your mobile number"
+              value={phoneNumber}
+              onChange={(e) => {
+                setPhoneNumber(e.target.value);
+              }}
+            ></Input>
           </div>
         )}
         {showbulkReviewContainer && (
@@ -171,7 +204,15 @@ const SendReview: React.FC<{}> = () => {
           </div>
         )}
 
-        <SendreviewButton>Send Review</SendreviewButton>
+        <SendreviewButton
+          onClick={
+            functionForReview === "handleSingleReviewSend"
+              ? handleSingleReviewSend
+              : handleBulkReviewSend
+          }
+        >
+          Send Review
+        </SendreviewButton>
 
         <Dialogbox
           isOpen={errorDialogOpen}
