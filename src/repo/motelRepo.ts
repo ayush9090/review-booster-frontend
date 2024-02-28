@@ -9,17 +9,17 @@ import {
 } from "firebase/firestore";
 import { firestore } from "../config/Firebase";
 import { UpdateProfileRequest } from "../constants/constants";
-
+let localhost="3.15.158.67"
 export class MotelRepo {
   dbRef = collection(firestore, "motels");
 
   async getMotels() {
-    const url = "http://localhost:8080/motel/getMotels";
+    const url = "http://"+localhost+":8080/motel/getMotels";
     const motels = await axios.get(url);
   }
 
   async getMotelsByEmail(email: string) {
-    const url = "http://localhost:8080/motel/getMotelsByEmail";
+    const url = "http://"+localhost+":8080/motel/getMotelsByEmail";
     const payload = { motelEmail: email };
     const motels = await axios.post(url, payload);
     return motels.data.motels;

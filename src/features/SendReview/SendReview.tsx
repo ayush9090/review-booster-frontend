@@ -25,6 +25,8 @@ const SendReview: React.FC<{}> = () => {
   const isSmallScreen = useMediaQuery({
     query: " (max-width: 721px)",
   });
+  const SendSmsandEmailRepo = new sendSmsandEmailRepo();
+
   const [errorDialogOpen, setErrorDialogOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [functionForReview, setfunctionForReview] =
@@ -137,11 +139,20 @@ const SendReview: React.FC<{}> = () => {
   };
 
   const handleSingleReviewSend = async () => {
-    //const res = await sendSmsandEmailRepo.sendEmail(name,email,phoneNumber);
-
+    const link =
+      "https://www.google.com/search?gs_ssp=eJzj4tZP1zcsSTc1KDNNMmC0UjWosDAzSTUzNjI0Nkg0sExKNrcyqEgzMzExT01KNks2MDEzMTLy4snITM_IScxLUcjMywMATo8SmQ&q=highland+inn&rlz=1C1ONGR_enUS1024US1024&oq=&aqs=chrome.3.35i39i362l3j46i39i175i199i362j35i39i362l4.5202712j0j7&sourceid=chrome&ie=UTF-8#lrd=0x864e632130a09bc7:0xf6447ebc6c046422,3,,,,";
+    const res = await SendSmsandEmailRepo.sendEmail(name, email, link);
+    if (res !== "error") {
+      setMessageType("Success");
+      setErrorMessage("review succesfully sent.....");
+      setErrorDialogOpen(true);
+    } else {
+      setMessageType("error");
+      setErrorMessage("error parsing data....");
+      setErrorDialogOpen(true);
+    }
   };
-  const handleBulkReviewSend = async () => {
-  };
+  const handleBulkReviewSend = async () => {};
   return (
     <Container>
       <Items smallscreen={isSmallScreen}>
@@ -204,13 +215,7 @@ const SendReview: React.FC<{}> = () => {
           </div>
         )}
 
-        <SendreviewButton
-          onClick={
-            functionForReview === "handleSingleReviewSend"
-              ? handleSingleReviewSend
-              : handleBulkReviewSend
-          }
-        >
+        <SendreviewButton onClick={handleSingleReviewSend}>
           Send Review
         </SendreviewButton>
 
